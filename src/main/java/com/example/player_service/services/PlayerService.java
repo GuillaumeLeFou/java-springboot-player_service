@@ -4,11 +4,11 @@ package com.example.player_service.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.game_service.dto.FriendDTO;
-import com.example.game_service.dto.PlayerCreateDTO;
-import com.example.game_service.dto.PlayerProfileDTO;
-import com.example.game_service.entity.Player;
-import com.example.game_service.repository.PlayerRepository;
+import com.example.player_service.dto.FriendDTO;
+import com.example.player_service.dto.PlayerCreateDTO;
+import com.example.player_service.dto.PlayerProfileDTO;
+import com.example.player_service.entity.Player;
+import com.example.player_service.repository.PlayerRepository;
 
 import jakarta.transaction.Transactional;
 

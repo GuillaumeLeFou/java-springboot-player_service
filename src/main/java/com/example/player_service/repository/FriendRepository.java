@@ -1,4 +1,4 @@
-package com.example.game_service.repository;
+package com.example.player_service.repository;
 
 public class FriendRepository {
     

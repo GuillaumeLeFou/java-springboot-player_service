@@ -1,8 +1,8 @@
-package com.example.game_service.repository;
+package com.example.player_service.repository;
 
 import java.util.Optional;
 
-import com.example.game_service.entity.Player;
+import com.example.player_service.entity.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
