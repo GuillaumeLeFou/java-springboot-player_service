@@ -38,6 +38,13 @@ public class PlayerService {;
         Player savedPlayer = playerRepository.save(player);
         return convertToProfileDTO(savedPlayer);
     }
+    
+    public PlayerProfileDTO getPlayerById(Long id) {
+        return playerRepository.findById(id)
+                .map(this::convertToProfileDTO)
+                .orElse(null);
+    }
+
 
     private PlayerProfileDTO convertToProfileDTO(Player player) {
         PlayerProfileDTO profileDTO = new PlayerProfileDTO();
