@@ -1,0 +1,12 @@
+le contrôleur va gérer toutes les requêtes http 
+il utilise le service pour faire les actions demandé 
+
+exemple :
+@PostMapping
+public ResponseEntity<Joueur> ajouterJoueur(@RequestBody JoueurDto joueurDto) {
+    Joueur joueur = joueurService.ajouterJoueur(joueurDto);
+    return ResponseEntity.ok(joueur);
+}
+
+ici on veut ajouter un joueur, on aura le dto pour avoir uniquement les variables qu'on a besoin
+ensuite on va créer un joueur grâce au service

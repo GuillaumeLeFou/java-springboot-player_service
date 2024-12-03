@@ -1,0 +1,16 @@
+c'est toute la logique métier du code
+exemple : 
+public User createUser(String name, String email) {
+    // Business logic example: email validation
+    if (email.contains("@")) {
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        return userDAO.save(user);
+    } else {
+        throw new IllegalArgumentException("Invalid email format");
+    }
+}
+
+ici il renvoie un utilisateur avec comme paramètre name et email
+il vérifie que l'email contient bien un "@" et ensuite il fait le reste du code

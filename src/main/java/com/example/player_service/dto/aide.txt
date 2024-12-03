@@ -1,0 +1,10 @@
+pour les dto tu dois uniquement mettre les donnes utilisés pour faire l'action
+donc par exemple create/delete :
+
+createPlayer : 
+    - name
+    - pseudo
+    - email
+
+- deletePlayer :
+    - playerId

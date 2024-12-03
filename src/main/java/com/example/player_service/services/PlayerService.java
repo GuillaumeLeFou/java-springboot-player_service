@@ -1,58 +1,47 @@
 package com.example.player_service.services;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.player_service.dto.FriendDTO;
+import com.example.player_service.dao.PlayerDAO;
 import com.example.player_service.dto.PlayerCreateDTO;
-import com.example.player_service.dto.PlayerProfileDTO;
 import com.example.player_service.entity.Player;
-import com.example.player_service.repository.PlayerRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service
-public class PlayerService {;
+public class PlayerService implements IPlayerService {
     @Autowired
-    private PlayerRepository playerRepository;
+    private PlayerDAO playerDAO;
 
-    @Transactional
-    public PlayerProfileDTO createPlayer(PlayerCreateDTO playerDTO) {
-        // Validate unique constraints
-        if (playerRepository.existsByPseudo(playerDTO.getPseudo())) {
-            throw new RuntimeException("Pseudo already exists");
-        }
-        if (playerRepository.existsByEmail(playerDTO.getEmail())) {
-            throw new RuntimeException("Email already exists");
-        }
+    @Override
+    public Player createPlayer(PlayerCreateDTO playerCreateDTO) {
+        Player savedPlayer = playerDAO.save(converteToPlayerEntity(playerCreateDTO));
+        return converteToCreatePlayerDTO(savedPlayer);
+    }
 
-        // Create new player
+    @Override
+    public Player findByPseudo(String pseudo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findByPseudo'");
+    }
+
+    @Override
+    public PlayerCreateDTO converteToCreatePlayerDTO(Player player) {
+        PlayerCreateDTO playerCreateDTO = new PlayerCreateDTO();
+        playerCreateDTO.setName(player.getName());
+        playerCreateDTO.setPseudo(player.getPseudo());
+        playerCreateDTO.setEmail(player.getEmail());
+        return playerCreateDTO;
+    }
+
+    @Override
+    public Player converteToPlayerEntity(PlayerCreateDTO playerCreateDTO) {
         Player player = new Player();
-        player.setName(playerDTO.getName());
-        player.setPseudo(playerDTO.getPseudo());
-        player.setEmail(playerDTO.getEmail());
-        player.setNiveau(1); // Default starting level
-        player.setTotalPoints(0); // Default starting points
-
-        Player savedPlayer = playerRepository.save(player);
-        return convertToProfileDTO(savedPlayer);
+        player.setName(playerCreateDTO.getName());
+        player.setPseudo(playerCreateDTO.getPseudo());
+        player.setEmail(playerCreateDTO.getEmail());
+        return player;
     }
+
+
     
-    public PlayerProfileDTO getPlayerById(Long id) {
-        return playerRepository.findById(id)
-                .map(this::convertToProfileDTO)
-                .orElse(null);
-    }
-
-
-    private PlayerProfileDTO convertToProfileDTO(Player player) {
-        PlayerProfileDTO profileDTO = new PlayerProfileDTO();
-        profileDTO.setId(player.getId());
-        profileDTO.setName(player.getName());
-        profileDTO.setPseudo(player.getPseudo());
-        profileDTO.setNiveau(player.getNiveau());
-        profileDTO.setTotalPoints(player.getTotalPoints());
-        return profileDTO;
-    }
 }
