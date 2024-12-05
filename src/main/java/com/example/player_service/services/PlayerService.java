@@ -12,11 +12,11 @@ public class PlayerService implements IPlayerService {
     @Autowired
     private PlayerDAO playerDAO;
 
-    @Override
-    public Player createPlayer(PlayerCreateDTO playerCreateDTO) {
-        Player savedPlayer = playerDAO.save(converteToPlayerEntity(playerCreateDTO));
-        return converteToCreatePlayerDTO(savedPlayer);
-    }
+    // @Override
+    // public Player createPlayer(PlayerCreateDTO playerCreateDTO) {
+    //     Player savedPlayer = playerDAO.save(converteToPlayerEntity(playerCreateDTO));
+    //     return converteToCreatePlayerDTO(savedPlayer);
+    // }
 
     @Override
     public Player findByPseudo(String pseudo) {
@@ -40,6 +40,12 @@ public class PlayerService implements IPlayerService {
         player.setPseudo(playerCreateDTO.getPseudo());
         player.setEmail(playerCreateDTO.getEmail());
         return player;
+    }
+
+    @Override
+    public Player createPlayer(PlayerCreateDTO playerCreateDTO) {
+        Player player = converteToPlayerEntity(playerCreateDTO);
+        return playerDAO.save(player);
     }
 
 

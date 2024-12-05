@@ -28,6 +28,11 @@ public class PlayerController {
     // Add a test endpoint
     @GetMapping("/test")
     public String testEndpoint() {
+        // PlayerCreateDTO playerdto = new PlayerCreateDTO();
+        // playerdto.setEmail("test@gmail.com");
+        // playerdto.setName("tqt");
+        // playerdto.setPseudo("oui oui");
+        // playerService.createPlayer(playerdto);
         return "Player service is up and running!";
     }
 }
