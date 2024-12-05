@@ -3,20 +3,14 @@ package com.example.player_service.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.player_service.dao.PlayerDAO;
+import com.example.player_service.dao.IPlayerDAO;
 import com.example.player_service.dto.PlayerCreateDTO;
 import com.example.player_service.entity.Player;
 
 @Service
 public class PlayerService implements IPlayerService {
     @Autowired
-    private PlayerDAO playerDAO;
-
-    // @Override
-    // public Player createPlayer(PlayerCreateDTO playerCreateDTO) {
-    //     Player savedPlayer = playerDAO.save(converteToPlayerEntity(playerCreateDTO));
-    //     return converteToCreatePlayerDTO(savedPlayer);
-    // }
+    private IPlayerDAO playerDAO;
 
     @Override
     public Player findByPseudo(String pseudo) {
@@ -43,9 +37,10 @@ public class PlayerService implements IPlayerService {
     }
 
     @Override
-    public Player createPlayer(PlayerCreateDTO playerCreateDTO) {
+    public Player registerPlayer(PlayerCreateDTO playerCreateDTO) {
         Player player = converteToPlayerEntity(playerCreateDTO);
         return playerDAO.save(player);
+        
     }
 
 

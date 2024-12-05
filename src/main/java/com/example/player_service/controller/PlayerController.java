@@ -18,21 +18,16 @@ public class PlayerController {
     @Autowired
     private IPlayerService playerService;
 
-    @PostMapping
-    public ResponseEntity<PlayerProfileDTO> createPlayer(
-            @Valid @RequestBody PlayerCreateDTO playerDTO) {
-        PlayerProfileDTO createdPlayer = playerService.createPlayer(playerDTO);
-        return ResponseEntity.ok(createdPlayer);
+    @PostMapping("/register")
+    public ResponseEntity<Player> registerPlayer(
+        @Valid @RequestBody PlayerCreateDTO playerDTO) {
+            Player player = playerService.registerPlayer(playerDTO);
+            return ResponseEntity.ok(player);
     }
 
     // Add a test endpoint
     @GetMapping("/test")
     public String testEndpoint() {
-        // PlayerCreateDTO playerdto = new PlayerCreateDTO();
-        // playerdto.setEmail("test@gmail.com");
-        // playerdto.setName("tqt");
-        // playerdto.setPseudo("oui oui");
-        // playerService.createPlayer(playerdto);
         return "Player service is up and running!";
     }
 }
