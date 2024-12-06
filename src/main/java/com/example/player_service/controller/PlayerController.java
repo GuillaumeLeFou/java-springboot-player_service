@@ -1,22 +1,26 @@
 package com.example.player_service.controller;
 
+import com.example.player_service.dto.AddFriendDTO;
 import com.example.player_service.dto.PlayerCreateDTO;
-import com.example.player_service.dto.PlayerProfileDTO;
 import com.example.player_service.dto.PlayerUpdateDTO;
+import com.example.player_service.entity.Friend;
 import com.example.player_service.entity.Player;
+import com.example.player_service.services.IFriendService;
 import com.example.player_service.services.IPlayerService;
 import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/Player")
 public class PlayerController {
     @Autowired
     private IPlayerService playerService;
+
+    @Autowired
+    private IFriendService friendService;
 
     @PostMapping("/joueurs")
     public ResponseEntity<Player> registerPlayer(
@@ -60,6 +64,18 @@ public class PlayerController {
         try {
             playerService.deletePlayerById(id);
             return ResponseEntity.ok("Player deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @PostMapping("/addFriendship")
+    public ResponseEntity<Friend> newFriendship(
+        @Valid @RequestBody AddFriendDTO friendDTO
+    ){
+        try {
+            Friend friend = friendService.addFriendship(friendDTO);
+            return ResponseEntity.ok(friend);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }

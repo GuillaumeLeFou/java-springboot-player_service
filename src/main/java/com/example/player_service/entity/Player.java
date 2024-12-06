@@ -1,12 +1,17 @@
 package com.example.player_service.entity;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -33,4 +38,10 @@ public class Player {
     
     @Column(nullable = false)
     private int totalPoints = 0;
+
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    private Set<Friend> friends;
+
+    @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL)
+    private Set<Friend> friendOf;
 }

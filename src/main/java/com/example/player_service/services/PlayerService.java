@@ -1,7 +1,5 @@
 package com.example.player_service.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,5 +75,11 @@ public class PlayerService implements IPlayerService {
         }
         playerDAO.deletePlayerById(id);
     }
+
+    // @Override
+    // public void addFriend(Long id, Long idFriend) {
+    //     // TODO Auto-generated method stub
+    //     throw new UnsupportedOperationException("Unimplemented method 'addFrient'");
+    // }
     
 }

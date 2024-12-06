@@ -12,4 +12,5 @@ public interface IPlayerService {
     Player converteToPlayerEntity(PlayerCreateDTO playerCreateDTO);
     Player updatePlayer(Long id, PlayerUpdateDTO playerUpdateDTO);
     void deletePlayerById(Long id);
+    // void addFriend(Long id, Long idFriend);
 } 

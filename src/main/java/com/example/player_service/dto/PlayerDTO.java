@@ -1,13 +1,11 @@
 package com.example.player_service.dto;
 
-import java.util.List;
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PlayerProfileDTO {
+public class PlayerDTO {
     private Long id;
     private String name;
     private String pseudo;

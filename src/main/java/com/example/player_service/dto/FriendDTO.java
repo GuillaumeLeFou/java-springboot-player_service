@@ -1,5 +1,8 @@
 package com.example.player_service.dto;
 
+
+import com.example.player_service.entity.Player;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,5 +10,6 @@ import lombok.Setter;
 @Setter
 public class FriendDTO {
     private Long id;
-    private String pseudo;
+    private Player player;
+    private Player friend;
 }

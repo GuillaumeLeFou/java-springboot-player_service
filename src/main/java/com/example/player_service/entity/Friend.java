@@ -7,22 +7,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Friend {
     // Ami : id, id_joueur, id_ami
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idPlayer", nullable = false)
     private Player player;
 
-    @ManyToOne
-    @JoinColumn(name = "friend_id", nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idFriend", nullable = false)
     private Player friend;
 }
