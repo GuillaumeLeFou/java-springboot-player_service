@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.example.player_service.dto.PlayerStatsDTO;
 import com.example.player_service.entity.Friend;
 import com.example.player_service.entity.Player;
 import com.example.player_service.repository.PlayerRepository;

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.player_service.dao.IFriendDAO;
 import com.example.player_service.dao.IPlayerDAO;
 import com.example.player_service.dto.PlayerCreateDTO;
+import com.example.player_service.dto.PlayerStatsDTO;
 import com.example.player_service.dto.PlayerUpdateDTO;
 import com.example.player_service.entity.Player;
 
@@ -79,6 +80,21 @@ public class PlayerService implements IPlayerService {
         }
         friendDAO.deleteFriendship(id);
         playerDAO.deletePlayerById(id);
+    }
+
+    @Override
+    public PlayerStatsDTO getStatsPlayer(Long id) {
+        PlayerStatsDTO player = convertToPlayerStats(playerDAO.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Player not found with id")));
+        return player;
+    }
+
+    @Override
+    public PlayerStatsDTO convertToPlayerStats(Player player) {
+        PlayerStatsDTO playerStats = new PlayerStatsDTO();
+        playerStats.setNiveau(player.getNiveau());
+        playerStats.setTotalPoints(player.getTotalPoints());
+        return playerStats;
     }
     
 }

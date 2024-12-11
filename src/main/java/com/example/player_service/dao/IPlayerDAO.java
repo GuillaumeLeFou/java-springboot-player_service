@@ -12,4 +12,5 @@ public interface IPlayerDAO {
     void deletePlayerById(Long id);
     Player findByPseudo(String pseudo);
     Optional<Player> findById(Long id);
+
 }

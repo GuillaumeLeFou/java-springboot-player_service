@@ -1,5 +1,6 @@
 package com.example.player_service.repository;
 
+import com.example.player_service.dto.PlayerStatsDTO;
 import com.example.player_service.entity.Player;
 
 import java.util.Optional;

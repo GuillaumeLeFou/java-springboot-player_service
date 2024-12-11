@@ -2,6 +2,7 @@ package com.example.player_service.controller;
 
 import com.example.player_service.dto.AddFriendDTO;
 import com.example.player_service.dto.PlayerCreateDTO;
+import com.example.player_service.dto.PlayerStatsDTO;
 import com.example.player_service.dto.PlayerUpdateDTO;
 import com.example.player_service.entity.Friend;
 import com.example.player_service.entity.Player;
@@ -49,6 +50,18 @@ public class PlayerController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @GetMapping("/stats/{id}")
+    public ResponseEntity<PlayerStatsDTO> getPlayerStats(@PathVariable Long id){
+        try {
+            PlayerStatsDTO player = playerService.getStatsPlayer(id);
+            return ResponseEntity.ok(player);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Player> updatePlayer(@PathVariable Long id, @RequestBody PlayerUpdateDTO playerUpdateDTO){
