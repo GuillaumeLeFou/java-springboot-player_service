@@ -3,6 +3,7 @@ package com.example.player_service.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.player_service.dao.IFriendDAO;
 import com.example.player_service.dao.IPlayerDAO;
 import com.example.player_service.dto.PlayerCreateDTO;
 import com.example.player_service.dto.PlayerUpdateDTO;
@@ -12,6 +13,9 @@ import com.example.player_service.entity.Player;
 public class PlayerService implements IPlayerService {
     @Autowired
     private IPlayerDAO playerDAO;
+
+    @Autowired
+    private IFriendDAO friendDAO;
 
     @Override
     public Player getPlayerByPseudo(String pseudo) {
@@ -73,13 +77,8 @@ public class PlayerService implements IPlayerService {
         if(!playerDAO.existsById(id)){
             throw new IllegalArgumentException("Player not found by id");
         }
+        friendDAO.deleteFriendship(id);
         playerDAO.deletePlayerById(id);
     }
-
-    // @Override
-    // public void addFriend(Long id, Long idFriend) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'addFrient'");
-    // }
     
 }

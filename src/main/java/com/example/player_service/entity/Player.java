@@ -1,6 +1,13 @@
 package com.example.player_service.entity;
 
+import java.util.List;
 import java.util.Set;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,9 +46,7 @@ public class Player {
     @Column(nullable = false)
     private int totalPoints = 0;
 
-    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    private Set<Friend> friends;
-
-    @OneToMany(mappedBy = "friend", cascade = CascadeType.ALL)
-    private Set<Friend> friendOf;
+    @OneToMany(mappedBy = "player", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Friend> friends;
 }

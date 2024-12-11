@@ -5,4 +5,5 @@ import com.example.player_service.entity.Friend;
 public interface IFriendDAO {
     Friend save(Friend friend);
     boolean friendshipExist(Long playerId, Long friendId);
+    void deleteFriendship(Long playerId);
 }

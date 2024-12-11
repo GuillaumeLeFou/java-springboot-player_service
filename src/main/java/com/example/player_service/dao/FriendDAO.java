@@ -20,5 +20,10 @@ public class FriendDAO implements IFriendDAO {
     public Friend save(Friend friend) {
         return friendRepository.save(friend);
     }
+
+    @Override
+    public void deleteFriendship(Long playerId) {
+        friendRepository.deleteAllById(playerId);
+    }
     
 }

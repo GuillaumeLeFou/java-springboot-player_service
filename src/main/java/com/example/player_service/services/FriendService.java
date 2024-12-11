@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 import com.example.player_service.dao.IFriendDAO;
 import com.example.player_service.dao.IPlayerDAO;
 import com.example.player_service.dto.AddFriendDTO;
-import com.example.player_service.dto.PlayerDTO;
 import com.example.player_service.entity.Friend;
 import com.example.player_service.entity.Player;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class FriendService implements IFriendService{
@@ -20,6 +21,7 @@ public class FriendService implements IFriendService{
 
 
     @Override
+    @Transactional
     public Friend addFriendship(AddFriendDTO addFriendDTO) {
         Player player = playerDAO.findById(addFriendDTO.getPlayer()).orElse(null);
         Player friend = playerDAO.findById(addFriendDTO.getFriend()).orElse(null);
@@ -37,10 +39,14 @@ public class FriendService implements IFriendService{
             throw new IllegalArgumentException("you can't add you");
         }
 
+        Friend friendship = convertInEntity(player, friend);
+        return friendDAO.save(friendship);
+    }
+
+    private Friend convertInEntity(Player player, Player friend){
         Friend friendship = new Friend();
         friendship.setPlayer(player);
         friendship.setFriend(friend);
-        return friendDAO.save(friendship);
+        return friendship;
     }
-    
 }

@@ -22,7 +22,7 @@ public class PlayerController {
     @Autowired
     private IFriendService friendService;
 
-    @PostMapping("/joueurs")
+    @PostMapping("/addPlayer")
     public ResponseEntity<Player> registerPlayer(
         @Valid @RequestBody PlayerCreateDTO playerDTO) {
             Player player = playerService.registerPlayer(playerDTO);
@@ -39,17 +39,18 @@ public class PlayerController {
         }
     }
 
-    @GetMapping("/joueurs/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<Player> getPlayerById(@PathVariable Long id){
         try {
             Player player = playerService.getPlayerById(id);
             return ResponseEntity.ok(player);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().body(null);
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Player> updatePlayer(@PathVariable Long id, @RequestBody PlayerUpdateDTO playerUpdateDTO){
         try{
             Player updatePlayer = playerService.updatePlayer(id, playerUpdateDTO);
@@ -59,7 +60,7 @@ public class PlayerController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePlayer(@PathVariable Long id){
         try {
             playerService.deletePlayerById(id);
@@ -83,7 +84,7 @@ public class PlayerController {
 
     // @PostMapping("/joueurs/{id}/amis")
 
-    // // Add a test endpoint
+    // Add a test endpoint
     @GetMapping("/test")
     public String testEndpoint() {
         return "Player service is up and running!";
