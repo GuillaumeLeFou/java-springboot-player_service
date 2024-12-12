@@ -15,4 +15,5 @@ public interface IPlayerService {
     PlayerStatsDTO getStatsPlayer(Long id);
     PlayerCreateDTO converteToCreatePlayerDTO(Player player);
     PlayerStatsDTO convertToPlayerStats(Player player);
+    void updateScoreAndLevel(Long playerId, int score, boolean victoire);
 } 

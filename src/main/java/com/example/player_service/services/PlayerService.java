@@ -96,5 +96,16 @@ public class PlayerService implements IPlayerService {
         playerStats.setTotalPoints(player.getTotalPoints());
         return playerStats;
     }
+
+    @Override
+    public void updateScoreAndLevel(Long playerId, int score, boolean victoire) {
+        Player player = playerDAO.findById(playerId)
+                .orElseThrow(() -> new IllegalArgumentException("Player not found"));
+        player.setTotalPoints(player.getTotalPoints() + score);
+        if (victoire) {
+            player.setNiveau(player.getNiveau() + 1);
+        }
+        playerDAO.save(player);
+    }
     
 }

@@ -4,6 +4,7 @@ import com.example.player_service.dto.AddFriendDTO;
 import com.example.player_service.dto.PlayerCreateDTO;
 import com.example.player_service.dto.PlayerStatsDTO;
 import com.example.player_service.dto.PlayerUpdateDTO;
+import com.example.player_service.dto.PlayerUpdateRequestDTO;
 import com.example.player_service.entity.Friend;
 import com.example.player_service.entity.Player;
 import com.example.player_service.services.IFriendService;
@@ -95,7 +96,11 @@ public class PlayerController {
         }
     }
 
-    // @PostMapping("/joueurs/{id}/amis")
+    @PostMapping("/updateScoreAndLevel")
+    public ResponseEntity<Void> updateScoreAndLevel(@RequestBody PlayerUpdateRequestDTO request) {
+        playerService.updateScoreAndLevel(request.getPlayerId(), request.getScore(), request.isVictoire());
+        return ResponseEntity.ok().build();
+    }
 
     // Add a test endpoint
     @GetMapping("/test")
