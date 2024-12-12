@@ -23,25 +23,25 @@ public class FriendService implements IFriendService{
     @Override
     @Transactional
     public Friend addFriendship(AddFriendDTO addFriendDTO) {
-        Player player = playerDAO.findById(addFriendDTO.getPlayer()).orElse(null);
-        Player friend = playerDAO.findById(addFriendDTO.getFriend()).orElse(null);
-        
-        if(player == null || friend == null){
-            throw new IllegalArgumentException("one player doesn't exist");
-        }
+        Player player = playerDAO.findById(addFriendDTO.getPlayer())
+            .orElseThrow(() -> new IllegalArgumentException("Player doesn't exist"));
 
-        if (friendDAO.friendshipExist(addFriendDTO.getPlayer(), addFriendDTO.getFriend()) ||
+        Player friend = playerDAO.findById(addFriendDTO.getFriend())
+            .orElseThrow(() -> new IllegalArgumentException("Friend doesn't exist"));
+
+            if (friendDAO.friendshipExist(addFriendDTO.getPlayer(), addFriendDTO.getFriend()) ||
             friendDAO.friendshipExist(addFriendDTO.getFriend(), addFriendDTO.getPlayer())) {
             throw new IllegalArgumentException("you are already friend");
         }
 
-        if(player.getId() == friend.getId()){
-            throw new IllegalArgumentException("you can't add you");
+        if (player.getId().equals(friend.getId())) {
+            throw new IllegalArgumentException("you can't add yourself as a friend");
         }
 
         Friend friendship = convertInEntity(player, friend);
         return friendDAO.save(friendship);
     }
+
 
     private Friend convertInEntity(Player player, Player friend){
         Friend friendship = new Friend();
